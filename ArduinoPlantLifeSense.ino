@@ -70,9 +70,8 @@ void loop() {
 
   // poll for new MQTT messages and send keep alives
   mqttClient.poll();
-
-  if (millis() - lastMillis > 300000)  {
-
+  
+  if (millis() - lastMillis > 60000)  {
     // publish a message roughly every 5 seconds.
     lastMillis = millis();
     
@@ -81,10 +80,11 @@ void loop() {
 }
 
 void publishMessage() {
-  StaticJsonDocument<128> doc;
+  Serial.println("--> Publish message");
+  StaticJsonDocument<192> doc;
 
   doc["time"] = getTime();
-  
+ 
   float temperature = ENV.readTemperature();
   doc["temp"] = temperature;
   
@@ -105,9 +105,13 @@ void publishMessage() {
   
   float uvIndex     = ENV.readUVIndex();
   doc["uvi"] = uvIndex; 
-  
-  // serializeJson(doc, Serial);
-  // Serial.println("");
+
+  int soilMoistureValue = 0;
+  soilMoistureValue = analogRead(A1);
+  doc["mois"] = soilMoistureValue; 
+    
+   serializeJson(doc, Serial);
+   Serial.println("");
   
   // send MQTT message
    mqttClient.beginMessage("arduino_outgoing_channel");
