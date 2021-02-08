@@ -71,7 +71,7 @@ void loop() {
   // poll for new MQTT messages and send keep alives
   mqttClient.poll();
   
-  if (millis() - lastMillis > 60000)  {
+  if (millis() - lastMillis > 900000)  {
     // publish a message roughly every 5 seconds.
     lastMillis = millis();
     
