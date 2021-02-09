@@ -32,8 +32,6 @@ MqttClient    mqttClient(sslClient);
 
 unsigned long lastMillis = 0;
 
-StaticJsonDocument<200> doc;
-
 void setup() {
   Serial.begin(9600);
   while (!Serial);
@@ -80,7 +78,6 @@ void loop() {
 }
 
 void publishMessage() {
-  Serial.println("--> Publish message");
   StaticJsonDocument<192> doc;
 
   doc["time"] = getTime();
@@ -110,8 +107,8 @@ void publishMessage() {
   soilMoistureValue = analogRead(A1);
   doc["mois"] = soilMoistureValue; 
     
-   serializeJson(doc, Serial);
-   Serial.println("");
+   //serializeJson(doc, Serial);
+  // Serial.println("");
   
   // send MQTT message
    mqttClient.beginMessage("arduino_outgoing_channel");
