@@ -1,5 +1,3 @@
-ArudinoPlantLifeSense
-
 ### Summary
 
 ArudinoPlantLifeSense is AWS IoT based project, where the IoT thing comprises of plant having an Arduino controller and sensors connected to it. The arduino micro controller is periodically transmitting sensor values (moisture, temperature, pressure and others) of the plant to AWS IoT. The sensor values can be then analyzed and monitored via dashboards. Furthermore, in case the plant is in a dangerous state alerts can be sent out.
